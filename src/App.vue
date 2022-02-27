@@ -1,10 +1,51 @@
 <template>
-  <div id="nav">
+  <div>
+    <div v-if="!mobile" class="app flex flex-column">
+      <Navigation />
+      <div class="app-content flex flex-column">
+        <InvoiceModal />
+        <router-view />
+      </div>
+    </div>
+    <div v-else class="mobile-message flex flex-column">
+      <h2>Sorry, this app is not supported on mobile devices</h2>
+      <p>To use this app use tablet or laptop/pc.</p>
+    </div>
   </div>
-  <router-view/>
 </template>
 
-<style>
+<script>
+import Navigation from "@/components/Navigation.vue";
+import InvoiceModal from "./components/IncoiceModal.vue";
+
+export default {
+  data() {
+    return {
+      mobile: false,
+    };
+  },
+  components: {
+    Navigation,
+    InvoiceModal
+  },
+  created() {
+    this.checkScreen();
+    window.addEventListener("resize", this.checkScreen);
+  },
+  methods: {
+    checkScreen() {
+      const screenSize = window.innerWidth;
+      if (screenSize <= 750) {
+        this.mobile = true;
+        return;
+      }
+      this.mobile = false;
+    },
+  },
+};
+</script>
+
+<style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
 * {
@@ -12,7 +53,31 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+}
+.app {
   background-color: #141625;
+  min-height: 100vh;
+  @media (min-width: 900px) {
+    flex-direction: row !important;
+  }
+  .app-content {
+    padding: 0 20px;
+    flex: 1;
+    position: relative;
+  }
+}
+
+.mobile-message {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
+  color: white;
+  background-color: #14141a;
+
+  p {
+    margin: 16px;
+  }
 }
 
 button,

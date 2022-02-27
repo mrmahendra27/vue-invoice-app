@@ -8,10 +8,34 @@
 
 <script>
 export default {
-    name: 'Navigation'
-}
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: "Navigation",
+};
 </script>
 
-<style>
-    
+<style lang="scss" scoped>
+header {
+  z-index: 99;
+  flex-direction: row;
+  background-color: #1e2139;
+  @media (min-width: 900px) {
+    min-height: 100%;
+    min-width: 80px;
+    flex-direction: column;
+    border-radius: 0 20px 20px 0;
+  }
+  .branding {
+    border-radius: 0 20px 20px 0;
+    background-color: #7c5dfa;
+    justify-content: center;
+    padding: 22px;
+    @media (min-width: 900px) {
+      width: 100%;
+    }
+    img {
+      width: auto;
+      height: 28px;
+    }
+  }
+}
 </style>
