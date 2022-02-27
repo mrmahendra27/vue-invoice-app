@@ -2,7 +2,7 @@
   <div
     @click="checkClick"
     ref="invoiceRef"
-    class="invoice-wrap flex flex-coulmn"
+    class="invoice-wrap flex flex-column"
   >
     <form @submit.prevent="submitInvoice" class="invoice-content">
       <h1>New Invoice</h1>
@@ -205,6 +205,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   name: "InvoiceModal",
   data() {
@@ -232,7 +233,10 @@ export default {
     };
   },
   methods: {
-    //
+    ...mapMutations(["TOGGLE_INVOICE"]),
+    closeInvoice() {
+      this.TOGGLE_INVOICE();
+    },
   },
 };
 </script>
@@ -259,7 +263,8 @@ export default {
     width: 100%;
     background-color: #141625;
     color: #fff;
-    box-shadow: 10px 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: 10px 4px 6px -1px rgba(0, 0, 0, 0.2),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
     h1 {
       margin-bottom: 48px;
